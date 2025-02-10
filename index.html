@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AURUM SOLUTIONS</title>
+    <!-- Importar la fuente de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
     <style>
         body, html {
             margin: 0;
@@ -29,9 +31,15 @@
             left: 50%;
             transform: translate(-50%, -50%);
             color: white;
-            font-size: 4em;
+            font-size: 6em; /* Tamaño de fuente más grande */
+            font-family: 'Poppins', sans-serif; /* Fuente moderna */
+            font-weight: 600; /* Grosor de la fuente */
             text-align: center;
             z-index: 2;
+            text-transform: uppercase; /* Convertir texto a mayúsculas */
+            letter-spacing: 4px; /* Espaciado entre letras */
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Sombra para destacar el texto */
+            animation: fadeIn 2s ease-in-out; /* Animación de entrada */
         }
         #video-overlay {
             position: absolute;
@@ -41,6 +49,17 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
             z-index: 1;
+        }
+        /* Animación de entrada para el texto */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -40%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
         }
     </style>
 </head>
