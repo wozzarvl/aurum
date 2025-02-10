@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Transparente</title>
+    <title>Menú con Video de Fondo</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
@@ -14,14 +14,37 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        body {
-            background-image: url('fondo-oscuro.jpg'); /* Reemplaza con tu imagen */
-            background-size: cover;
-            background-position: center;
+        /* Contenedor del video de fondo */
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100vh;
+            overflow: hidden;
+            z-index: -1;
         }
 
-        /* Contenedor superior con correo y redes sociales */
+        /* Video en pantalla completa */
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Capa de fondo estático cuando el video termina */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            display: none;
+        }
+
+        /* Barra superior con contacto y redes sociales */
         .top-bar {
             width: 100%;
             background: transparent;
@@ -30,6 +53,7 @@
             justify-content: space-between;
             padding: 10px 50px;
             font-size: 14px;
+            position: relative;
         }
 
         .top-bar .contact-info {
@@ -82,45 +106,30 @@
             color: #FFD700; /* Amarillo dorado */
         }
 
-        .navbar .menu .dropdown {
-            position: relative;
-        }
-
-        .navbar .menu .dropdown-content {
-            display: none;
-            position: absolute;
-            background: rgba(0, 0, 0, 0.8);
-            top: 25px;
-            left: 0;
-            min-width: 150px;
-            padding: 10px;
-            border-radius: 5px;
-        }
-
-        .navbar .menu .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .navbar .menu .dropdown-content a {
-            display: block;
-            padding: 8px;
-            color: white;
-        }
-
-        .navbar .menu .dropdown-content a:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Espaciado para que no se superponga con el menú */
+        /* Espaciado para que el contenido no se solape con el menú */
         .content {
-            padding-top: 100px;
+            padding-top: 120px;
             color: white;
             text-align: center;
             font-size: 24px;
+            position: relative;
+            z-index: 10;
         }
+
     </style>
 </head>
 <body>
+
+    <!-- Contenedor del video de fondo -->
+    <div class="video-container">
+        <video id="background-video" autoplay muted playsinline>
+            <source src="MVI_0780.mp4" type="video/mp4">  <!-- Reemplaza con tu archivo de video -->
+            Tu navegador no soporta videos en HTML5.
+        </video>
+    </div>
+
+    <!-- Capa de fondo estático cuando el video termina -->
+    <div class="video-overlay" id="video-overlay"></div>
 
     <!-- Barra superior con contacto y redes sociales -->
     <div class="top-bar">
@@ -142,13 +151,7 @@
         <div class="menu">
             <a href="#">Home</a>
             <a href="#">Classes</a>
-            <div class="dropdown">
-                <a href="#">Pages ⌄</a>
-                <div class="dropdown-content">
-                    <a href="#">Page 1</a>
-                    <a href="#">Page 2</a>
-                </div>
-            </div>
+            <a href="#">Pages</a>
             <a href="#">About</a>
             <a href="#">Events</a>
             <a href="#">Gallery</a>
@@ -158,8 +161,30 @@
 
     <div class="content">
         <h1>Bienvenido a nuestro sitio</h1>
-        <p>Este es un menú moderno con fondo transparente.</p>
+        <p>Este es un menú moderno con video de fondo.</p>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const video = document.getElementById('background-video');
+            const overlay = document.getElementById('video-overlay');
+
+            video.addEventListener('ended', function() {
+                // Capturar el último fotograma como imagen estática
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                // Convertir el último fotograma en imagen de fondo
+                overlay.style.backgroundImage = `url(${canvas.toDataURL()})`;
+                overlay.style.display = 'block'; // Mostrar la imagen de fondo
+                video.style.display = 'none'; // Ocultar el video
+            });
+        });
+    </script>
 
 </body>
 </html>
