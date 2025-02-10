@@ -3,101 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Moderno</title>
-    <!-- Enlace a Google Fonts para la fuente Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Menú Transparente</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
-        /* Estilos generales */
-        body {
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
 
-        /* Contenedor del menú */
+        body {
+            background-image: url('fondo-oscuro.jpg'); /* Reemplaza con tu imagen */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+        }
+
+        /* Contenedor superior con correo y redes sociales */
+        .top-bar {
+            width: 100%;
+            background: transparent;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 50px;
+            font-size: 14px;
+        }
+
+        .top-bar .contact-info {
+            display: flex;
+            gap: 15px;
+        }
+
+        .top-bar .social-icons a {
+            color: white;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        /* Navbar */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 50px;
-            background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            padding: 15px 50px;
+            background: rgba(255, 255, 255, 0.1); /* Transparente con ligero fondo */
+            backdrop-filter: blur(5px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
         }
 
-        /* Logo */
-        .navbar-logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: #333;
+        .navbar .logo {
+            font-size: 22px;
+            font-weight: 600;
+            color: white;
             text-decoration: none;
         }
 
-        /* Lista de enlaces del menú */
-        .navbar-menu {
-            list-style: none;
+        .navbar .menu {
             display: flex;
-            margin: 0;
-            padding: 0;
+            gap: 25px;
         }
 
-        .navbar-menu li {
-            margin-left: 30px;
-        }
-
-        .navbar-menu li a {
+        .navbar .menu a {
+            color: white;
             text-decoration: none;
-            color: #333;
             font-size: 16px;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: 0.3s;
         }
 
-        .navbar-menu li a:hover {
-            color: #007bff;
+        .navbar .menu a:hover {
+            color: #FFD700; /* Amarillo dorado */
         }
 
-        /* Botón de acción */
-        .navbar-action {
-            margin-left: 30px;
+        .navbar .menu .dropdown {
+            position: relative;
         }
 
-        .navbar-action a {
-            text-decoration: none;
-            color: #fff;
-            background-color: #007bff;
-            padding: 10px 20px;
+        .navbar .menu .dropdown-content {
+            display: none;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            top: 25px;
+            left: 0;
+            min-width: 150px;
+            padding: 10px;
             border-radius: 5px;
-            font-size: 16px;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
         }
 
-        .navbar-action a:hover {
-            background-color: #0056b3;
+        .navbar .menu .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .navbar .menu .dropdown-content a {
+            display: block;
+            padding: 8px;
+            color: white;
+        }
+
+        .navbar .menu .dropdown-content a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Espaciado para que no se superponga con el menú */
+        .content {
+            padding-top: 100px;
+            color: white;
+            text-align: center;
+            font-size: 24px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Barra de navegación -->
+    <!-- Barra superior con contacto y redes sociales -->
+    <div class="top-bar">
+        <div class="contact-info">
+            <span><i class="fas fa-envelope"></i> info@domain.com</span>
+            <span><i class="fas fa-phone"></i> +1 234 4567 8910</span>
+        </div>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+
+    <!-- Menú de navegación -->
     <nav class="navbar">
-        <!-- Logo -->
-        <a href="#" class="navbar-logo">AURUM SOLUTIONS</a>
-
-        <!-- Menú -->
-        <ul class="navbar-menu">
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Servicios</a></li>
-            <li><a href="#">Nosotros</a></li>
-            <li><a href="#">Proyectos</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Contacto</a></li>
-        </ul>
-
-        <!-- Botón de acción -->
-        <div class="navbar-action">
-            <a href="#">Descargar</a>
+        <a href="#" class="logo">BRAND</a>
+        <div class="menu">
+            <a href="#">Home</a>
+            <a href="#">Classes</a>
+            <div class="dropdown">
+                <a href="#">Pages ⌄</a>
+                <div class="dropdown-content">
+                    <a href="#">Page 1</a>
+                    <a href="#">Page 2</a>
+                </div>
+            </div>
+            <a href="#">About</a>
+            <a href="#">Events</a>
+            <a href="#">Gallery</a>
+            <a href="#">Contact</a>
         </div>
     </nav>
+
+    <div class="content">
+        <h1>Bienvenido a nuestro sitio</h1>
+        <p>Este es un menú moderno con fondo transparente.</p>
+    </div>
 
 </body>
 </html>
