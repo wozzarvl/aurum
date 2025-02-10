@@ -4,84 +4,182 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AURUM SOLUTIONS</title>
-    <!-- Importar la fuente de Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
-        body, html {
+        * {
             margin: 0;
             padding: 0;
-            height: 100%;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
-        #video-container {
-            position: relative;
+
+        /* Contenedor del video de fondo */
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100vh;
             overflow: hidden;
+            z-index: -1;
         }
-        #video-background {
+
+        /* Video en pantalla completa */
+        .video-container video {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        #company-name {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 6em; /* Tamaño de fuente más grande */
-            font-family: 'Poppins', sans-serif; /* Fuente moderna */
-            font-weight: 600; /* Grosor de la fuente */
-            text-align: center;
-            z-index: 2;
-            text-transform: uppercase; /* Convertir texto a mayúsculas */
-            letter-spacing: 4px; /* Espaciado entre letras */
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Sombra para destacar el texto */
-            animation: fadeIn 2s ease-in-out; /* Animación de entrada */
-        }
-        #video-overlay {
-            position: absolute;
+
+        /* Capa de fondo estático cuando el video termina */
+        .video-overlay {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            display: none;
         }
-        /* Animación de entrada para el texto */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translate(-50%, -40%);
-            }
-            to {
-                opacity: 1;
-                transform: translate(-50%, -50%);
-            }
+
+        /* Barra superior con contacto y redes sociales */
+        .top-bar {
+            width: 100%;
+            background: transparent;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 50px;
+            font-size: 14px;
+            position: relative;
         }
+
+        .top-bar .contact-info {
+            display: flex;
+            gap: 15px;
+        }
+
+        .top-bar .social-icons a {
+            color: white;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 15px 50px;
+            background: rgba(255, 255, 255, 0.1); /* Transparente con ligero fondo */
+            
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        .navbar .logo {
+            font-size: 22px;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+        }
+
+        .navbar .menu {
+            display: flex;
+            gap: 25px;
+        }
+
+        .navbar .menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .navbar .menu a:hover {
+            color: #FFD700; /* Amarillo dorado */
+        }
+
+        /* Espaciado para que el contenido no se solape con el menú */
+        .content {
+            padding-top: 120px;
+            color: white;
+            text-align: center;
+            font-size: 24px;
+            position: relative;
+            z-index: 10;
+        }
+
     </style>
 </head>
 <body>
 
-<div id="video-container">
-    <video id="video-background" autoplay muted>
-        <source src="MVI_0780.mp4" type="video/mp4">
-        Tu navegador no soporta la etiqueta de video.
-    </video>
-    <div id="video-overlay"></div>
-    <h1 id="company-name">AURUM SOLUTIONS</h1>
-</div>
+    <!-- Contenedor del video de fondo -->
+    <div class="video-container">
+        <video id="background-video" autoplay muted playsinline>
+            <source src="MVI_0780.mp4" type="video/mp4">  <!-- Reemplaza con tu archivo de video -->
+            Tu navegador no soporta videos en HTML5.
+        </video>
+    </div>
 
-<script>
-    const video = document.getElementById('video-background');
+    <!-- Capa de fondo estático cuando el video termina -->
+    <div class="video-overlay" id="video-overlay"></div>
 
-    video.addEventListener('ended', function() {
-        video.pause();
-        video.currentTime = video.duration - 0.1; // Congela el video en el último fotograma
-    });
-</script>
+    <!-- Barra superior con contacto y redes sociales -->
+    <div class="top-bar">
+        <div class="contact-info">
+          
+        </div>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+
+    <!-- Menú de navegación -->
+    <nav class="navbar">
+        <a href="#" class="logo">AURUM SOLUTIONS</a>
+        <div class="menu">
+            <a href="#">Inicio</a>
+            <a href="#">Conoce</a>
+            <a href="#">Contacto</a>            
+        </div>
+    </nav>
+
+    <div class="content">
+        <h1>Innovamos, conectamos, creamos...</h1>
+        <p>AURUM SOLUTIONS.</p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const video = document.getElementById('background-video');
+            const overlay = document.getElementById('video-overlay');
+
+            video.addEventListener('ended', function() {
+                // Capturar el último fotograma como imagen estática
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                // Convertir el último fotograma en imagen de fondo
+                overlay.style.backgroundImage = `url(${canvas.toDataURL()})`;
+                overlay.style.display = 'block'; // Mostrar la imagen de fondo
+                video.style.display = 'none'; // Ocultar el video
+            });
+        });
+    </script>
 
 </body>
 </html>
