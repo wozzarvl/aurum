@@ -1,104 +1,109 @@
-<!DOCTYPE html> 
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AURUM SOLUTIONS</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const palabras = ["Innovamos....", "Conectamos....", "Creamos....", "Desarrollamos....", "Transformamos...."];
-            let index = 0;
-            let subIndex = 0;
-            let isDeleting = false;
-            const velocidad = 150;
-            const textoElemento = document.getElementById("animacion-texto");
 
-            function escribirTexto() {
-                const palabraCompleta = palabras[index];
-                textoElemento.textContent = palabraCompleta.substring(0, subIndex);
-                
-                if (!isDeleting && subIndex < palabraCompleta.length) {
-                    subIndex++;
-                } else if (isDeleting && subIndex > 0) {
-                    subIndex--;
-                } else {
-                    isDeleting = !isDeleting;
-                    if (!isDeleting) {
-                        index = (index + 1) % palabras.length;
-                    }
-                }
-                
-                setTimeout(escribirTexto, isDeleting ? velocidad / 2 : velocidad);
-            }
-            
-            escribirTexto();
-        });
-    </script>
-    <style>
-        .video-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
-        }
+<?php include('includes/header.php'); ?>
+<header style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:140px 20px 60px;text-align:center;">
+  <img src="assets/img/Logo_transparent.png" alt="Logo Aurum" style="width:200px;margin-bottom:20px;animation:float 3s ease-in-out infinite;filter:drop-shadow(0 0 5px rgba(212,175,55,0.2));">
+  <h1 style="font-size:3rem;font-weight:700;margin-bottom:16px;">AURUM Solutions</h1>
+  <p style="font-size:1.25rem;max-width:700px;margin:0 auto;color:#3a3a3c;font-weight:400;">Innovación y tecnología para transformar tu negocio.</p>
+</header>
+<section style="padding:100px 20px;max-width:1100px;margin:0 auto;text-align:center;">
+  <h2 style="font-size:2.25rem;color:#1c1c1e;margin-bottom:20px;">¿Qué hacemos?</h2>
+  <p>En Aurum impulsamos la transformación digital de las empresas mediante soluciones tecnológicas que conectan, optimizan y automatizan. Nos especializamos en integrar sistemas, digitalizar procesos y desarrollar plataformas que generan eficiencia operativa y valor real para el negocio.</p>
 
-        #background-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+  <div id="slideshow" style="
+    position:relative;
+    max-width:800px;
+    margin:40px auto;
+    overflow:hidden;
+    border-radius:24px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.05);
+    background-color:#f9f9f9;
+  ">
+    <img
+      id="slide-img2"
+      src=""
+      alt="Nuestros proyectos"
+      style="
+        width:100%;
+        display:block;
+        opacity:0;
+        transition:opacity 1s ease-in-out;
+        border-radius:24px;
+      ">
+  </div>
 
-        .video-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: -1;
-        }
+  <?php
+    $imgFiles = glob(__DIR__ . '/assets/img2/*.{jpg,jpeg,png,gif}', GLOB_BRACE);
+    $slides = [];
+    foreach ($imgFiles as $file) {
+      $slides[] = 'assets/img2/' . basename($file);
+    }
+    echo "<script>const slides = " . json_encode($slides) . ";</script>";
+  ?>
 
-        section {
-            position: relative;
-            z-index: 1;
-        }
-    </style>
-</head>
-<body class="bg-gray-900 text-white flex flex-col min-h-screen">
+  <script>
+    (function(){
+      if (!slides || !slides.length) return;
+      let idx = 0;
+      const imgEl = document.getElementById('slide-img2');
+      function showNext() {
+        imgEl.style.opacity = 0;
+        setTimeout(() => {
+          idx = (idx + 1) % slides.length;
+          imgEl.src = slides[idx];
+          imgEl.style.opacity = 1;
+        }, 500);
+      }
+      imgEl.src = slides[0];
+      imgEl.onload = () => imgEl.style.opacity = 1;
+      setInterval(showNext, 5000);
+    })();
+  </script>
+</section>
+</section>
+<section style="padding:80px 20px; max-width:1100px; margin:0 auto; auto;text-align:center;">
 
-    <header class="p-3 bg-gray-800 text-3xl font-bold">AURUM SOLUTIONS</header>
-    
-    <nav class="p-2 bg-gray-800 text-center text-xl">
-        <ul class="flex justify-center space-x-6">
-            <li><a href="index.php" class="text-white hover:text-gray-400">Inicio</a></li>
-            <li><a href="conoce.php" class="text-white hover:text-gray-400">Conoce</a></li>
-            <li><a href="contacto.php" class="text-white hover:text-gray-400">Contacto</a></li>
-        </ul>
-    </nav>
+    <h2 style="font-size:2.25rem; color:#1c1c1e; margin-bottom:10px;">Nuestra Filosofía</h2>
+    <div style="width:60px; height:4px; background:#d4af37; margin:20px auto;"></div>
+    <p style="font-weight:400; max-width:800px; margin:0 auto 40px; color:#3a3a3c; font-size:1.125rem;">
+      En Aurum creemos en la tecnología con propósito: combinamos 
+      <strong style="color:#d4af37;">innovación constante</strong>, 
+      <strong style="color:#d4af37;">pensamiento estratégico</strong> y 
+      <strong style="color:#d4af37;">ejecución precisa</strong> 
+      para generar soluciones que marcan la diferencia.
+    </p>
 
-    <!-- Contenedor del video de fondo -->
-    <div class="video-container">
-        <video id="background-video" autoplay muted loop playsinline>
-            <source src="MVI_0780.mp4" type="video/mp4">  <!-- Reemplaza con tu archivo de video -->
-            Tu navegador no soporta videos en HTML5.
-        </video>
+    <div style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap; margin-top:20px;">
+      <div style="text-align:center; max-width:180px;">
+        <img src="assets/img/icon-innovacion.png" alt="Innovación" style="width:48px; margin-bottom:10px;">
+        <p style="font-weight:500; color:#1c1c1e;">Innovación constante</p>
+      </div>
+      <div style="text-align:center; max-width:180px;">
+        <img src="assets/img/icon-estrategia.png" alt="Estrategia" style="width:48px; margin-bottom:10px;">
+        <p style="font-weight:500; color:#1c1c1e;">Pensamiento estratégico</p>
+      </div>
+      <div style="text-align:center; max-width:180px;">
+        <img src="assets/img/icon-ejecucion.png" alt="Ejecución" style="width:48px; margin-bottom:10px;">
+        <p style="font-weight:500; color:#1c1c1e;">Ejecución precisa</p>
+      </div>
     </div>
-    <!-- Capa de fondo estático cuando el video termina -->
-    <div class="video-overlay" id="video-overlay"></div>
+  </div>
+</section>
 
-    <!-- Contenedor centrado para el texto -->
-    <section class="flex-grow flex items-center justify-center">
-        <h1 class="text-6xl font-bold text-center">
-            <span id="animacion-texto"></span>
-        </h1>
-    </section>
+<div style="height:100px;"></div>
 
-    <footer class="text-center p-4 bg-gray-800">
-        © 2025 AURUM SOLUTIONS
-    </footer>
-</body>
-</html>
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = 1;
+        entry.target.style.transform = "translateY(0)";
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const card = document.querySelector('.filo-card');
+  if (card) observer.observe(card);
+</script>
+
+<?php include('includes/footer.php'); ?>
